@@ -30,8 +30,8 @@ namespace Project.Player
 
             inputVector = inputVector.normalized;
             
-            Vector3 moveDirections = new Vector3(inputVector.x, 0, inputVector.y);
-            transform.position += moveDirections * moveSpeed * Time.deltaTime;
+            Vector3 moveDirection = new Vector3(inputVector.x, 0, inputVector.y);
+            transform.position += moveDirection * moveSpeed * Time.deltaTime;
         }
     }   
 }
