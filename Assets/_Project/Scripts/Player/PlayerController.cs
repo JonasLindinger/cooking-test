@@ -14,8 +14,15 @@ namespace Project.Player
         [SerializeField] private InputManager inputManager;
 
         private bool isWalking;
+        private Vector3 lastInteractDirection;
         
         private void Update()
+        {
+            HandleMovement();
+            HandleInteractions();
+        }
+
+        private void HandleMovement()
         {
             Vector2 inputVector = inputManager.GetNormalizedMovementVector();
             
@@ -69,6 +76,23 @@ namespace Project.Player
             
             float rotationSpeed = 10f;
             transform.forward = Vector3.Slerp(transform.forward, moveDirection, Time.deltaTime * rotationSpeed);
+        }
+
+        private void HandleInteractions()
+        {
+            Vector2 inputVector = inputManager.GetNormalizedMovementVector();
+            
+            Vector3 moveDirection = new Vector3(inputVector.x, 0, inputVector.y);
+
+            if (moveDirection != Vector3.zero)
+                // We move!
+                lastInteractDirection = moveDirection;
+            
+            float interactDistance = 1f;
+            if (Physics.Raycast(transform.position, lastInteractDirection, out RaycastHit hit, interactDistance))
+            {
+                // We are in front of something
+            }
         }
     }   
 }
