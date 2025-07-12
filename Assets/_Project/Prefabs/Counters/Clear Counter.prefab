@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5297063614220374049}
   - component: {fileID: 7096480133646659037}
+  - component: {fileID: 134801511907458473}
   - component: {fileID: 538080767246861159}
   m_Layer: 6
   m_Name: Clear Counter
@@ -46,6 +47,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7d013480c1fc434a9b714103c502ae5b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &134801511907458473
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 342248445403104623}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3c024099aa604aa1accae403ef583ca5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  clearCounter: {fileID: 7096480133646659037}
+  visualGameObject: {fileID: 4262477048953697241}
+  selectedMaterial: {fileID: 2100000, guid: ee5d9e067c8320e4b9b5389e442c0c27, type: 2}
+  unselectedMaterial: {fileID: 2100000, guid: 45e5dd6348a137840b9c7d9e15404d92, type: 2}
 --- !u!65 &538080767246861159
 BoxCollider:
   m_ObjectHideFlags: 0

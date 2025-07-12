@@ -1,5 +1,6 @@
 ﻿using System;
 using _Project.Scripts.Counters;
+using _Project.Scripts.CustomEventArgs;
 using _Project.Scripts.Input;
 using UnityEngine;
 
@@ -7,20 +8,32 @@ namespace Project.Player
 {
     public class PlayerController : MonoBehaviour
     {
+        // Statics
+        public static PlayerController Instance { get; private set; }
+        
+        // Events
+        public event EventHandler<OnSelectedCounterChangedEventArgs> OnSelectedCounterChanged;
+        
         // Getters
         public bool IsWalking => isWalking;
         
-        [Header("Movement")]
         [SerializeField] private float moveSpeed = 7f;
-        
         [SerializeField] private InputManager inputManager;
-        
         [SerializeField] private LayerMask counterLayerMask;
 
         private bool isWalking;
         private Vector3 lastInteractDirection;
         private ClearCounter selectedCounter;
-        
+
+        private void Awake()
+        {
+            if (Instance != null)
+            {
+                Debug.LogError("There is more than one PlayerController in the scene!");
+            }
+            Instance = this;
+        }
+
         private void Start()
         {
             inputManager.OnInteractAction += OnInteractAction;
@@ -87,14 +100,6 @@ namespace Project.Player
             float rotationSpeed = 10f;
             transform.forward = Vector3.Slerp(transform.forward, moveDirection, Time.deltaTime * rotationSpeed);
         }
-
-        private void OnInteractAction(object sender, EventArgs e)
-        {
-            if (selectedCounter != null)
-            {
-                selectedCounter.Interact();
-            }
-        }
         
         private void HandleInteractions()
         {
@@ -115,17 +120,35 @@ namespace Project.Player
                     // Has ClearCounter component
                     if (clearCounter != selectedCounter)
                     {
-                        selectedCounter = clearCounter;
+                        SetSelectedCounter(clearCounter);
                     }
                 }
                 else
                 {
-                    selectedCounter = null;
+                    SetSelectedCounter(null);
                 }
             }
             else
             {
-                selectedCounter = null;
+                SetSelectedCounter(null);
+            }
+        }
+        
+        private void SetSelectedCounter(ClearCounter newSelectedCounter)
+        {
+            selectedCounter = newSelectedCounter;
+            
+            OnSelectedCounterChanged?.Invoke(this, new OnSelectedCounterChangedEventArgs
+            {
+                SelectedCounter = newSelectedCounter,
+            });
+        }
+        
+        private void OnInteractAction(object sender, EventArgs e)
+        {
+            if (selectedCounter != null)
+            {
+                selectedCounter.Interact();
             }
         }
     }   
