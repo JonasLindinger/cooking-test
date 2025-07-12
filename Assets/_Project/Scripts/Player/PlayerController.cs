@@ -33,7 +33,8 @@ namespace Project.Player
             Vector3 moveDirection = new Vector3(inputVector.x, 0, inputVector.y);
             transform.position += moveDirection * moveSpeed * Time.deltaTime;
             
-            transform.forward = moveDirection;
+            float rotationSpeed = 10f;
+            transform.forward = Vector3.Slerp(transform.forward, moveDirection, Time.deltaTime * rotationSpeed);
         }
     }   
 }
