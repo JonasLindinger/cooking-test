@@ -20,7 +20,14 @@ namespace Project.Player
             Vector2 inputVector = inputManager.GetNormalizedMovementVector();
             
             Vector3 moveDirection = new Vector3(inputVector.x, 0, inputVector.y);
-            transform.position += moveDirection * moveSpeed * Time.deltaTime;
+
+            float playerSize = .7f;
+            bool canMove = !Physics.Raycast(transform.position, moveDirection, playerSize);
+
+            if (canMove)
+            {
+                transform.position += moveDirection * moveSpeed * Time.deltaTime;
+            }
             
             isWalking = moveDirection != Vector3.zero;
             
