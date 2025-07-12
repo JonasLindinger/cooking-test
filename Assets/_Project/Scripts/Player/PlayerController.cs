@@ -1,4 +1,5 @@
-﻿using _Project.Scripts.Input;
+﻿using _Project.Scripts.Counters;
+using _Project.Scripts.Input;
 using UnityEngine;
 
 namespace Project.Player
@@ -12,6 +13,8 @@ namespace Project.Player
         [SerializeField] private float moveSpeed = 7f;
         
         [SerializeField] private InputManager inputManager;
+        
+        [SerializeField] private LayerMask counterLayerMask;
 
         private bool isWalking;
         private Vector3 lastInteractDirection;
@@ -89,9 +92,14 @@ namespace Project.Player
                 lastInteractDirection = moveDirection;
             
             float interactDistance = 1f;
-            if (Physics.Raycast(transform.position, lastInteractDirection, out RaycastHit hit, interactDistance))
+            if (Physics.Raycast(transform.position, lastInteractDirection, out RaycastHit hit, interactDistance, counterLayerMask))
             {
                 // We are in front of something
+                if (hit.transform.TryGetComponent(out ClearCounter clearCounter))
+                {
+                    // Has ClearCounter component
+                    clearCounter.Interact();
+                }
             }
         }
     }   
