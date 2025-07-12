@@ -34,7 +34,7 @@ namespace Project.Player
                 // Cannot move towards moveDirection
                 
                 // Attempt only X movement
-                Vector3 moveDirectionX = new Vector3(moveDirection.x, 0, 0);
+                Vector3 moveDirectionX = new Vector3(moveDirection.x, 0, 0).normalized;
                 canMove = !Physics.CapsuleCast(transform.position, 
                     transform.position + Vector3.up * playerHeight, playerRadius, moveDirectionX, moveDistance);
 
@@ -48,7 +48,7 @@ namespace Project.Player
                     // Cannot move only on the X
                     
                     // Attempt only X movement
-                    Vector3 moveDirectionZ = new Vector3(0, 0, moveDirection.z);
+                    Vector3 moveDirectionZ = new Vector3(0, 0, moveDirection.z).normalized;
                     canMove = !Physics.CapsuleCast(transform.position, 
                         transform.position + Vector3.up * playerHeight, playerRadius, moveDirectionZ, moveDistance);
 
