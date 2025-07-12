@@ -1,0 +1,9 @@
+﻿using UnityEngine;
+
+namespace _Project.Scripts.Counters
+{
+    public class ClearCounter : MonoBehaviour
+    {
+        
+    }
+}
