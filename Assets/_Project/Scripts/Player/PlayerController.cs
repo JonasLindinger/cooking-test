@@ -1,4 +1,5 @@
-﻿using _Project.Scripts.Counters;
+﻿using System;
+using _Project.Scripts.Counters;
 using _Project.Scripts.Input;
 using UnityEngine;
 
@@ -18,7 +19,13 @@ namespace Project.Player
 
         private bool isWalking;
         private Vector3 lastInteractDirection;
+        private ClearCounter selectedCounter;
         
+        private void Start()
+        {
+            inputManager.OnInteractAction += OnInteractAction;
+        }
+
         private void Update()
         {
             HandleMovement();
@@ -81,6 +88,14 @@ namespace Project.Player
             transform.forward = Vector3.Slerp(transform.forward, moveDirection, Time.deltaTime * rotationSpeed);
         }
 
+        private void OnInteractAction(object sender, EventArgs e)
+        {
+            if (selectedCounter != null)
+            {
+                selectedCounter.Interact();
+            }
+        }
+        
         private void HandleInteractions()
         {
             Vector2 inputVector = inputManager.GetNormalizedMovementVector();
@@ -98,8 +113,19 @@ namespace Project.Player
                 if (hit.transform.TryGetComponent(out ClearCounter clearCounter))
                 {
                     // Has ClearCounter component
-                    clearCounter.Interact();
+                    if (clearCounter != selectedCounter)
+                    {
+                        selectedCounter = clearCounter;
+                    }
                 }
+                else
+                {
+                    selectedCounter = null;
+                }
+            }
+            else
+            {
+                selectedCounter = null;
             }
         }
     }   
