@@ -32,6 +32,8 @@ namespace Project.Player
             
             Vector3 moveDirection = new Vector3(inputVector.x, 0, inputVector.y);
             transform.position += moveDirection * moveSpeed * Time.deltaTime;
+            
+            transform.forward = moveDirection;
         }
     }   
 }
