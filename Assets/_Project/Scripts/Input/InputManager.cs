@@ -14,9 +14,7 @@ namespace _Project.Scripts.Input
 
         public Vector2 GetNormalizedMovementVector()
         {
-            Vector2 inputVector = Vector2.zero;
-
-            inputVector = playerInputActions.Player.Move.ReadValue<Vector2>();
+            Vector2 inputVector = playerInputActions.Player.Move.ReadValue<Vector2>();
 
             inputVector = inputVector.normalized;
             
