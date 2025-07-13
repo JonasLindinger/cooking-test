@@ -2,11 +2,12 @@
 using _Project.Scripts.Counters;
 using _Project.Scripts.CustomEventArgs;
 using _Project.Scripts.Input;
+using _Project.Scripts.Kitchen;
 using UnityEngine;
 
 namespace Project.Player
 {
-    public class PlayerController : MonoBehaviour
+    public class PlayerController : MonoBehaviour, IKitchenObjectParent
     {
         // Statics
         public static PlayerController Instance { get; private set; }
@@ -20,10 +21,13 @@ namespace Project.Player
         [SerializeField] private float moveSpeed = 7f;
         [SerializeField] private InputManager inputManager;
         [SerializeField] private LayerMask counterLayerMask;
+        [SerializeField] private Transform kitchenObjectHoldPoint;
 
         private bool isWalking;
         private Vector3 lastInteractDirection;
         private ClearCounter selectedCounter;
+        
+        private KitchenObject kitchenObject;
 
         private void Awake()
         {
@@ -148,8 +152,37 @@ namespace Project.Player
         {
             if (selectedCounter != null)
             {
-                selectedCounter.Interact();
+                selectedCounter.Interact(this);
             }
         }
+
+        #region IKitchenObjectParent
+
+        public Transform GetKitchenObjectFollowTransform()
+        {
+            return kitchenObjectHoldPoint;
+        }
+
+        public void SetKitchenObject(KitchenObject newKitchenObject)
+        {
+            kitchenObject = newKitchenObject;
+        }
+
+        public KitchenObject GetKitchenObject()
+        {
+            return kitchenObject;
+        }
+
+        public void ClearKitchenObject()
+        {
+            kitchenObject = null;
+        }
+
+        public bool HasKitchenObject()
+        {
+            return kitchenObject != null;
+        }
+        
+        #endregion
     }   
 }

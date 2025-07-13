@@ -8,25 +8,25 @@ namespace _Project.Scripts.Kitchen
     {
 		// Getter
         public KitchenScriptableObject KitchenScriptableObjectData => kitchenScriptableObject;
-        public ClearCounter ClearCounter => clearCounter;
+        public IKitchenObjectParent KitchenObjectParent => kitchenObjectParent;
         
         [SerializeField] private KitchenScriptableObject kitchenScriptableObject;
 
-		private ClearCounter clearCounter;
+		private IKitchenObjectParent kitchenObjectParent;
 
-		public void SetClearCounter(ClearCounter newClearCounter)
+		public void SetClearCounter(IKitchenObjectParent newKitchenObjectParent)
 		{
-			if (clearCounter != null)
-				clearCounter.ClearKitchenObject();
+			if (kitchenObjectParent != null)
+				kitchenObjectParent.ClearKitchenObject();
 			
-			clearCounter = newClearCounter;
+			kitchenObjectParent = newKitchenObjectParent;
 
-			if (clearCounter.HasKitchenObject)
+			if (kitchenObjectParent.HasKitchenObject())
 				Debug.LogError("Counter already has a KitchenObject!");
 			
-			clearCounter.SetKitchenObject(this);
+			kitchenObjectParent.SetKitchenObject(this);
 			
-			transform.parent = clearCounter.KitchenObjectFollowTransform;
+			transform.parent = kitchenObjectParent.GetKitchenObjectFollowTransform();
 			transform.localPosition = Vector3.zero;
 		}
     }
