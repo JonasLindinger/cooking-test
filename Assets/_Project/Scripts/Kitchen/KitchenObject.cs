@@ -1,15 +1,10 @@
-﻿using _Project.Scripts.Counters;
-using _Project.Scripts.Object;
+﻿using _Project.Scripts.Object;
 using UnityEngine;
 
 namespace _Project.Scripts.Kitchen
 {
     public class KitchenObject : MonoBehaviour
     {
-		// Getter
-        public KitchenScriptableObject KitchenScriptableObjectData => kitchenScriptableObject;
-        public IKitchenObjectParent KitchenObjectParent => kitchenObjectParent;
-        
         [SerializeField] private KitchenScriptableObject kitchenScriptableObject;
 
 		private IKitchenObjectParent kitchenObjectParent;
@@ -22,7 +17,7 @@ namespace _Project.Scripts.Kitchen
 			kitchenObjectParent = newKitchenObjectParent;
 
 			if (kitchenObjectParent.HasKitchenObject())
-				Debug.LogError("Counter already has a KitchenObject!");
+				Debug.LogError("KitchenObjectParent already has a KitchenObject!");
 			
 			kitchenObjectParent.SetKitchenObject(this);
 			
