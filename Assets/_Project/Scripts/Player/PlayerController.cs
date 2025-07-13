@@ -25,7 +25,7 @@ namespace Project.Player
 
         private bool isWalking;
         private Vector3 lastInteractDirection;
-        private ClearCounter selectedCounter;
+        private BaseCounter selectedCounter;
         
         private KitchenObject kitchenObject;
 
@@ -119,12 +119,12 @@ namespace Project.Player
             if (Physics.Raycast(transform.position, lastInteractDirection, out RaycastHit hit, interactDistance, counterLayerMask))
             {
                 // We are in front of something
-                if (hit.transform.TryGetComponent(out ClearCounter clearCounter))
+                if (hit.transform.TryGetComponent(out BaseCounter baseCounter))
                 {
                     // Has ClearCounter component
-                    if (clearCounter != selectedCounter)
+                    if (baseCounter != selectedCounter)
                     {
-                        SetSelectedCounter(clearCounter);
+                        SetSelectedCounter(baseCounter);
                     }
                 }
                 else
@@ -138,13 +138,13 @@ namespace Project.Player
             }
         }
         
-        private void SetSelectedCounter(ClearCounter newSelectedCounter)
+        private void SetSelectedCounter(BaseCounter newCounter)
         {
-            selectedCounter = newSelectedCounter;
+            selectedCounter = newCounter;
             
             OnSelectedCounterChanged?.Invoke(this, new OnSelectedCounterChangedEventArgs
             {
-                SelectedCounter = newSelectedCounter,
+                SelectedCounter = newCounter,
             });
         }
         

@@ -5,6 +5,6 @@ namespace _Project.Scripts.CustomEventArgs
 {
     public class OnSelectedCounterChangedEventArgs : EventArgs
     {
-        public ClearCounter SelectedCounter;
+        public BaseCounter SelectedCounter;
     }
 }

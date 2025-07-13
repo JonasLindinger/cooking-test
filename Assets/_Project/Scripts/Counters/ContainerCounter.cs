@@ -5,7 +5,7 @@ using UnityEngine;
 
 namespace _Project.Scripts.Counters
 {
-    public class ClearCounter : BaseCounter, IKitchenObjectParent
+    public class ContainerCounter : BaseCounter, IKitchenObjectParent
     {
         [SerializeField] private KitchenScriptableObject kitchenObjectData;
         [SerializeField] private Transform counterTopPoint;
@@ -25,34 +25,34 @@ namespace _Project.Scripts.Counters
                 kitchenObject.SetClearCounter(player);
             }
         }
-
+        
         #region IKitchenObjectParent
-
+        
         public Transform GetKitchenObjectFollowTransform()
         {
             return counterTopPoint;
         }
-
+        
         public void SetKitchenObject(KitchenObject newKitchenObject)
         {
             kitchenObject = newKitchenObject;
         }
-
+        
         public KitchenObject GetKitchenObject()
         {
             return kitchenObject;
         }
-
+        
         public void ClearKitchenObject()
         {
             kitchenObject = null;
         }
-
+        
         public bool HasKitchenObject()
         {
             return kitchenObject != null;
         }
-        
+                
         #endregion
     }
 }

@@ -6,7 +6,7 @@ namespace _Project.Scripts.Counters
 {
     public class SelectedCounterVisual : MonoBehaviour
     {
-        [SerializeField] private ClearCounter clearCounter;
+        [SerializeField] private BaseCounter counter;
         [SerializeField] private MeshRenderer visualGameObject;
         [SerializeField] private Material selectedMaterial;
         [SerializeField] private Material unselectedMaterial;
@@ -19,7 +19,7 @@ namespace _Project.Scripts.Counters
 
         private void OnSelectedCounterChanged(object sender, OnSelectedCounterChangedEventArgs e)
         {
-            if (e.SelectedCounter == clearCounter)
+            if (e.SelectedCounter == counter)
             {
                 Show();
             }
