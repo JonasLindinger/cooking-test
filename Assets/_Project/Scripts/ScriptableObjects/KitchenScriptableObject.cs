@@ -3,7 +3,7 @@
 namespace _Project.Scripts.Object
 {
     [CreateAssetMenu()]
-    public class KitchenObject : ScriptableObject
+    public class KitchenScriptableObject : ScriptableObject
     {
         public string objectName;
         public Sprite sprite;
