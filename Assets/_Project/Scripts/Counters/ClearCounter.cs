@@ -21,10 +21,7 @@ namespace _Project.Scripts.Counters
             if (kitchenObject == null)
             {
                 Transform kitchenObjectTransform = Instantiate(tomatoPrefab.prefab, counterTopPoint).transform;
-                kitchenObjectTransform.localPosition = Vector3.zero;
-                
-                kitchenObject = kitchenObjectTransform.gameObject.GetComponent<KitchenObject>();
-                kitchenObject.SetClearCounter(this);
+                kitchenObjectTransform.GetComponent<KitchenObject>().SetClearCounter(this);
             }
         }
         

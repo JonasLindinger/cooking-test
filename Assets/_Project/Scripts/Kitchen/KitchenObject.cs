@@ -20,6 +20,9 @@ namespace _Project.Scripts.Kitchen
 				clearCounter.ClearKitchenObject();
 			
 			clearCounter = newClearCounter;
+
+			if (clearCounter.HasKitchenObject)
+				Debug.LogError("Counter already has a KitchenObject!");
 			
 			clearCounter.SetKitchenObject(this);
 			
