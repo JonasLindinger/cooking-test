@@ -7,7 +7,7 @@ namespace _Project.Scripts.Counters
 {
     public class ClearCounter : MonoBehaviour, IKitchenObjectParent
     {
-        [SerializeField] private KitchenScriptableObject tomatoPrefab;
+        [SerializeField] private KitchenScriptableObject kitchenObjectData;
         [SerializeField] private Transform counterTopPoint;
         
         private KitchenObject kitchenObject;
@@ -16,7 +16,7 @@ namespace _Project.Scripts.Counters
         {
             if (kitchenObject == null)
             {
-                Transform kitchenObjectTransform = Instantiate(tomatoPrefab.prefab, counterTopPoint).transform;
+                Transform kitchenObjectTransform = Instantiate(kitchenObjectData.prefab, counterTopPoint).transform;
                 kitchenObjectTransform.GetComponent<KitchenObject>().SetClearCounter(this);
             }
             else
