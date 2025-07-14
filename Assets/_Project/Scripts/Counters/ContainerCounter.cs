@@ -14,10 +14,14 @@ namespace _Project.Scripts.Counters
 
         public override void Interact(PlayerController player)
         {
-            Transform kitchenObjectTransform = Instantiate(kitchenObjectData.prefab).transform;
-            kitchenObjectTransform.GetComponent<KitchenObject>().SetClearCounter(player);
+            if (!player.HasKitchenObject())
+            {
+                // Player is not carrying anything
+                Transform kitchenObjectTransform = Instantiate(kitchenObjectData.prefab).transform;
+                kitchenObjectTransform.GetComponent<KitchenObject>().SetKitchenObjectParent(player);
             
-            OnPlayerGrabbedObject?.Invoke(this, EventArgs.Empty);
+                OnPlayerGrabbedObject?.Invoke(this, EventArgs.Empty);
+            }
         }
     }
 }

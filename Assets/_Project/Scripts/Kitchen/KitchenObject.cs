@@ -9,7 +9,7 @@ namespace _Project.Scripts.Kitchen
 
 		private IKitchenObjectParent kitchenObjectParent;
 
-		public void SetClearCounter(IKitchenObjectParent newKitchenObjectParent)
+		public void SetKitchenObjectParent(IKitchenObjectParent newKitchenObjectParent)
 		{
 			if (kitchenObjectParent != null)
 				kitchenObjectParent.ClearKitchenObject();
