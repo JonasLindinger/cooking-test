@@ -7,9 +7,8 @@ namespace _Project.Scripts.Counters
     public class SelectedCounterVisual : MonoBehaviour
     {
         [SerializeField] private BaseCounter counter;
-        [SerializeField] private MeshRenderer visualGameObject;
-        [SerializeField] private Material selectedMaterial;
-        [SerializeField] private Material unselectedMaterial;
+        [SerializeField] private GameObject normalVisual;
+        [SerializeField] private GameObject selectedVisual;
         
         private void Start()
         {
@@ -31,12 +30,14 @@ namespace _Project.Scripts.Counters
 
         private void Show()
         {
-            visualGameObject.material = selectedMaterial;
+            normalVisual.SetActive(false);
+            selectedVisual.SetActive(true);
         }
 
         private void Hide()
         {
-            visualGameObject.material = unselectedMaterial;
+            normalVisual.SetActive(true);
+            selectedVisual.SetActive(false);
         }
     }
 }
