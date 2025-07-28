@@ -939,7 +939,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8345872111454013077, guid: a2ff929b5aa0b7f42a504606c68a6418, type: 3}
       propertyPath: m_Name
-      value: Apple Container Counter Variant
+      value: Tomato Container Counter Variant
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
