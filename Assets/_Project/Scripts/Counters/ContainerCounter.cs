@@ -17,8 +17,7 @@ namespace _Project.Scripts.Counters
             if (!player.HasKitchenObject())
             {
                 // Player is not carrying anything
-                Transform kitchenObjectTransform = Instantiate(kitchenObjectData.prefab).transform;
-                kitchenObjectTransform.GetComponent<KitchenObject>().SetKitchenObjectParent(player);
+                KitchenObject.SpawnKitchenObject(kitchenObjectData, player);
             
                 OnPlayerGrabbedObject?.Invoke(this, EventArgs.Empty);
             }

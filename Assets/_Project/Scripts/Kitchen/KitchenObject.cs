@@ -5,6 +5,9 @@ namespace _Project.Scripts.Kitchen
 {
     public class KitchenObject : MonoBehaviour
     {
+	    // Getter
+	    public IKitchenObjectParent KitchenObjectParent => kitchenObjectParent;
+	    
         [SerializeField] private KitchenScriptableObject kitchenScriptableObject;
 
 		private IKitchenObjectParent kitchenObjectParent;
@@ -23,6 +26,19 @@ namespace _Project.Scripts.Kitchen
 			
 			transform.parent = kitchenObjectParent.GetKitchenObjectFollowTransform();
 			transform.localPosition = Vector3.zero;
+		}
+
+		public void DestroySelf()
+		{
+			kitchenObjectParent.ClearKitchenObject();
+			
+			Destroy(gameObject);
+		}
+
+		public static void SpawnKitchenObject(KitchenScriptableObject kitchenScriptableObject, IKitchenObjectParent parent)
+		{
+			Transform kitchenObjectTransform = Instantiate(kitchenScriptableObject.prefab).transform;
+			kitchenObjectTransform.GetComponent<KitchenObject>().SetKitchenObjectParent(parent);
 		}
     }
 }

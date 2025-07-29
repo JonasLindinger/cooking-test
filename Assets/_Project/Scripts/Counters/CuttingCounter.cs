@@ -1,9 +1,14 @@
-﻿using Project.Player;
+﻿using _Project.Scripts.Kitchen;
+using _Project.Scripts.Object;
+using Project.Player;
+using UnityEngine;
 
 namespace _Project.Scripts.Counters
 {
     public class CuttingCounter : BaseCounter
     {
+        [SerializeField] private KitchenScriptableObject cutKitchenObjectSo;
+        
         public override void Interact(PlayerController player)
         {
             if (!HasKitchenObject())
@@ -31,6 +36,17 @@ namespace _Project.Scripts.Counters
                     // Player not carrying anything
                     GetKitchenObject().SetKitchenObjectParent(player);
                 }
+            }
+        }
+
+        public override void InteractAlternate(PlayerController player)
+        {
+            if (HasKitchenObject())
+            {
+                // There is a KitchenObject here
+                GetKitchenObject().DestroySelf();
+                
+                KitchenObject.SpawnKitchenObject(cutKitchenObjectSo, this);
             }
         }
     }
