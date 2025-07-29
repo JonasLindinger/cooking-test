@@ -143,6 +143,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Tomato Container Counter
       objectReference: {fileID: 0}
+    - target: {fileID: 6261596317397474477, guid: 4e04e20fe270db34ea2be89d6d606d42, type: 3}
+      propertyPath: kitchenObjectData
+      value: 
+      objectReference: {fileID: 11400000, guid: e929342b5e955364f8fd827163becd81, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects:
