@@ -134,6 +134,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2497646183674785995, guid: 4e04e20fe270db34ea2be89d6d606d42, type: 3}
+      propertyPath: kitchenObjectData
+      value: 
+      objectReference: {fileID: 11400000, guid: fe73550c44a2b254a83c54cc31fe4160, type: 2}
     - target: {fileID: 5682195035507648556, guid: 4e04e20fe270db34ea2be89d6d606d42, type: 3}
       propertyPath: m_Name
       value: Meat Patty Uncooked Container Counter

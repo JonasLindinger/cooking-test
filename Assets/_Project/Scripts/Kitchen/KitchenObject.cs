@@ -27,6 +27,7 @@ namespace _Project.Scripts.Kitchen
 			
 			transform.parent = kitchenObjectParent.GetKitchenObjectFollowTransform();
 			transform.localPosition = Vector3.zero;
+			transform.localRotation = Quaternion.Euler(Vector3.zero);
 		}
 
 		public void DestroySelf()

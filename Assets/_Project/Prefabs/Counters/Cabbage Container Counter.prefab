@@ -134,6 +134,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2497646183674785995, guid: 4e04e20fe270db34ea2be89d6d606d42, type: 3}
+      propertyPath: kitchenObjectData
+      value: 
+      objectReference: {fileID: 11400000, guid: 80f22284ad86e3144bf96784d8ee4d95, type: 2}
     - target: {fileID: 5682195035507648556, guid: 4e04e20fe270db34ea2be89d6d606d42, type: 3}
       propertyPath: m_Name
       value: Cabbage Container Counter
