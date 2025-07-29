@@ -7,6 +7,7 @@ namespace _Project.Scripts.Kitchen
     {
 	    // Getter
 	    public IKitchenObjectParent KitchenObjectParent => kitchenObjectParent;
+	    public KitchenScriptableObject KitchenScriptableObject => kitchenScriptableObject;
 	    
         [SerializeField] private KitchenScriptableObject kitchenScriptableObject;
 

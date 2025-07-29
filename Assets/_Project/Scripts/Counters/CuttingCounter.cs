@@ -7,7 +7,7 @@ namespace _Project.Scripts.Counters
 {
     public class CuttingCounter : BaseCounter
     {
-        [SerializeField] private KitchenScriptableObject cutKitchenObjectSo;
+        [SerializeField] private CuttingRecipeScriptableObject[] cuttingRecipes;
         
         public override void Interact(PlayerController player)
         {
@@ -44,10 +44,23 @@ namespace _Project.Scripts.Counters
             if (HasKitchenObject())
             {
                 // There is a KitchenObject here
+                KitchenScriptableObject outputKitchenObject = GetOutputFromInput(GetKitchenObject().KitchenScriptableObject);
+                
                 GetKitchenObject().DestroySelf();
                 
-                KitchenObject.SpawnKitchenObject(cutKitchenObjectSo, this);
+                KitchenObject.SpawnKitchenObject(outputKitchenObject, this);
             }
+        }
+
+        private KitchenScriptableObject GetOutputFromInput(KitchenScriptableObject input)
+        {
+            foreach (var recipe in cuttingRecipes)
+            {
+                if (recipe.input == input)
+                    return recipe.output;
+            }
+
+            return null;
         }
     }
 }

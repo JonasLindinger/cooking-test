@@ -711,6 +711,14 @@ PrefabInstance:
       propertyPath: cutKitchenObjectSo
       value: 
       objectReference: {fileID: 11400000, guid: 0ac70ca7bd1ee3840be229052f4463a0, type: 2}
+    - target: {fileID: 2505676979310197220, guid: d0a4a477d0f4b2d4fa3243f6391b2a17, type: 3}
+      propertyPath: cuttingRecipes.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2505676979310197220, guid: d0a4a477d0f4b2d4fa3243f6391b2a17, type: 3}
+      propertyPath: 'cuttingRecipes.Array.data[0]'
+      value: 
+      objectReference: {fileID: 11400000, guid: f0d71f0f9722ab44bb184f054bc27c72, type: 2}
     - target: {fileID: 5233103637506227631, guid: d0a4a477d0f4b2d4fa3243f6391b2a17, type: 3}
       propertyPath: m_LocalPosition.x
       value: -8.5
