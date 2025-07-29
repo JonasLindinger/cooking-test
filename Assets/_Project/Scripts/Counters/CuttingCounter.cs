@@ -17,7 +17,11 @@ namespace _Project.Scripts.Counters
                 if (player.HasKitchenObject())
                 {
                     // Player is carrying something
-                    player.GetKitchenObject().SetKitchenObjectParent(this);
+                    if (HasRecipeWithInput(player.GetKitchenObject().KitchenScriptableObject))
+                    {
+                        // Player carrying something that can be cut.
+                        player.GetKitchenObject().SetKitchenObjectParent(this);
+                    }
                 }
                 else
                 {
@@ -41,9 +45,9 @@ namespace _Project.Scripts.Counters
 
         public override void InteractAlternate(PlayerController player)
         {
-            if (HasKitchenObject())
+            if (HasKitchenObject() && HasRecipeWithInput(GetKitchenObject().KitchenScriptableObject))
             {
-                // There is a KitchenObject here
+                // There is a KitchenObject here and it can be cut
                 KitchenScriptableObject outputKitchenObject = GetOutputFromInput(GetKitchenObject().KitchenScriptableObject);
                 
                 GetKitchenObject().DestroySelf();
@@ -61,6 +65,11 @@ namespace _Project.Scripts.Counters
             }
 
             return null;
+        }
+
+        private bool HasRecipeWithInput(KitchenScriptableObject input)
+        {
+            return GetOutputFromInput(input) != null;
         }
     }
 }

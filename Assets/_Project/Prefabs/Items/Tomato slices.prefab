@@ -131,4 +131,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 096d78e909d248febcd261f347d252af, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  kitchenScriptableObject: {fileID: 11400000, guid: e929342b5e955364f8fd827163becd81, type: 2}
+  kitchenScriptableObject: {fileID: 11400000, guid: 0ac70ca7bd1ee3840be229052f4463a0, type: 2}
