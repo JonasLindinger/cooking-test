@@ -41,6 +41,7 @@ namespace Project.Player
         private void Start()
         {
             inputManager.OnInteractAction += OnInteractAction;
+            inputManager.OnInteractAlternateAction += OnInteractAlternateAction;
         }
 
         private void Update()
@@ -153,6 +154,14 @@ namespace Project.Player
             if (selectedCounter != null)
             {
                 selectedCounter.Interact(this);
+            }
+        }
+        
+        private void OnInteractAlternateAction(object sender, EventArgs e)
+        {
+            if (selectedCounter != null)
+            {
+                selectedCounter.InteractAlternate(this);
             }
         }
 

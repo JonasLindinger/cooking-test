@@ -16,6 +16,11 @@ namespace _Project.Scripts.Counters
             throw new NotImplementedException();
         }
         
+        public virtual void InteractAlternate(PlayerController player)
+        {
+            throw new NotImplementedException();
+        }
+        
         #region IKitchenObjectParent
         
         public Transform GetKitchenObjectFollowTransform()
