@@ -7,5 +7,6 @@ namespace _Project.Scripts.Object
     {
         public KitchenScriptableObject input;
         public KitchenScriptableObject output;
+        public int cuttingProgressMax;
     }
 }

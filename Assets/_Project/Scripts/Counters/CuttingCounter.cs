@@ -8,6 +8,8 @@ namespace _Project.Scripts.Counters
     public class CuttingCounter : BaseCounter
     {
         [SerializeField] private CuttingRecipeScriptableObject[] cuttingRecipes;
+
+        private int cuttingProgress;
         
         public override void Interact(PlayerController player)
         {
@@ -17,10 +19,11 @@ namespace _Project.Scripts.Counters
                 if (player.HasKitchenObject())
                 {
                     // Player is carrying something
-                    if (HasRecipeWithInput(player.GetKitchenObject().KitchenScriptableObject))
+                    if (HasRecipeFromInput(player.GetKitchenObject().KitchenScriptableObject))
                     {
                         // Player carrying something that can be cut.
                         player.GetKitchenObject().SetKitchenObjectParent(this);
+                        cuttingProgress = 0;
                     }
                 }
                 else
@@ -45,31 +48,45 @@ namespace _Project.Scripts.Counters
 
         public override void InteractAlternate(PlayerController player)
         {
-            if (HasKitchenObject() && HasRecipeWithInput(GetKitchenObject().KitchenScriptableObject))
+            if (HasKitchenObject() && HasRecipeFromInput(GetKitchenObject().KitchenScriptableObject))
             {
                 // There is a KitchenObject here and it can be cut
-                KitchenScriptableObject outputKitchenObject = GetOutputFromInput(GetKitchenObject().KitchenScriptableObject);
+                cuttingProgress++;
                 
-                GetKitchenObject().DestroySelf();
+                CuttingRecipeScriptableObject cuttingRecipe = GetCuttingRecipeFromInput(GetKitchenObject().KitchenScriptableObject);
+
+                if (cuttingProgress >= cuttingRecipe.cuttingProgressMax)
+                {
+                    KitchenScriptableObject outputKitchenObject = GetOutputFromInput(GetKitchenObject().KitchenScriptableObject);
                 
-                KitchenObject.SpawnKitchenObject(outputKitchenObject, this);
+                    GetKitchenObject().DestroySelf();
+                
+                    KitchenObject.SpawnKitchenObject(outputKitchenObject, this);
+                }
             }
         }
 
         private KitchenScriptableObject GetOutputFromInput(KitchenScriptableObject input)
         {
+            CuttingRecipeScriptableObject cuttingRecipe = GetCuttingRecipeFromInput(input);
+            return cuttingRecipe != null ? cuttingRecipe.output : null;
+        }
+
+        private bool HasRecipeFromInput(KitchenScriptableObject input)
+        {
+            CuttingRecipeScriptableObject cuttingRecipe = GetCuttingRecipeFromInput(input);
+            return cuttingRecipe != null;
+        }
+
+        private CuttingRecipeScriptableObject GetCuttingRecipeFromInput(KitchenScriptableObject input)
+        {
             foreach (var recipe in cuttingRecipes)
             {
                 if (recipe.input == input)
-                    return recipe.output;
+                    return recipe;
             }
 
             return null;
-        }
-
-        private bool HasRecipeWithInput(KitchenScriptableObject input)
-        {
-            return GetOutputFromInput(input) != null;
         }
     }
 }
