@@ -18,7 +18,7 @@ namespace _Project.Scripts.Counters
         
         public virtual void InteractAlternate(PlayerController player)
         {
-            throw new NotImplementedException();
+            // throw new NotImplementedException();
         }
         
         #region IKitchenObjectParent
