@@ -1,5 +1,6 @@
 ﻿using System;
 using _Project.Scripts.CustomEventArgs;
+using _Project.Scripts.Helper;
 using _Project.Scripts.Kitchen;
 using _Project.Scripts.Object;
 using Project.Player;
@@ -7,8 +8,9 @@ using UnityEngine;
 
 namespace _Project.Scripts.Counters
 {
-    public class StoveCounter : BaseCounter
+    public class StoveCounter : BaseCounter, IHasProgress
     {
+        public event EventHandler<OnProgressChangedEventArgs> OnProgressChanged;
         public event EventHandler<OnStoveCounterStateChangedEventArgs> OnStateChanged;
         
         [Header("Settings")]
@@ -38,7 +40,12 @@ namespace _Project.Scripts.Counters
                         break;
                     case StoveCounterState.Frying:
                         fryingTimer += Time.deltaTime;
-                
+                        
+                        OnProgressChanged?.Invoke(this, new OnProgressChangedEventArgs
+                        {
+                            ProgressNormalized = fryingTimer / currentFryingRecipe.fryingTimerMax
+                        });
+                        
                         if (fryingTimer > currentFryingRecipe.fryingTimerMax)
                         {
                             // Fried
@@ -58,6 +65,11 @@ namespace _Project.Scripts.Counters
                     case StoveCounterState.Fried:
                         burningTimer += Time.deltaTime;
                 
+                        OnProgressChanged?.Invoke(this, new OnProgressChangedEventArgs
+                        {
+                            ProgressNormalized = burningTimer / currentBurningRecipe.burningTimerMax
+                        });
+                        
                         if (burningTimer > currentBurningRecipe.burningTimerMax)
                         {
                             // Fried
@@ -69,6 +81,11 @@ namespace _Project.Scripts.Counters
                             OnStateChanged?.Invoke(this, new OnStoveCounterStateChangedEventArgs
                             {
                                 State = state
+                            });
+                            
+                            OnProgressChanged?.Invoke(this, new OnProgressChangedEventArgs
+                            {
+                                ProgressNormalized = 0
                             });
                         }
                         break;
@@ -124,6 +141,11 @@ namespace _Project.Scripts.Counters
                     OnStateChanged?.Invoke(this, new OnStoveCounterStateChangedEventArgs
                     {
                         State = state
+                    });
+                    
+                    OnProgressChanged?.Invoke(this, new OnProgressChangedEventArgs
+                    {
+                        ProgressNormalized = 0
                     });
                 }
             }

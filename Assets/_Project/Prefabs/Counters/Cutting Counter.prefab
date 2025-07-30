@@ -488,6 +488,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: ProgressBarUI
       objectReference: {fileID: 0}
+    - target: {fileID: 7460247292190425785, guid: 8fc33e3e843895645a0ec640697b5f29, type: 3}
+      propertyPath: m_FillOrigin
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 7518283312845689458, guid: 8fc33e3e843895645a0ec640697b5f29, type: 3}
       propertyPath: cuttingCounter
       value: 
