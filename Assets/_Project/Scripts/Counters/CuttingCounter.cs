@@ -11,6 +11,7 @@ namespace _Project.Scripts.Counters
     public class CuttingCounter : BaseCounter
     {
         public event EventHandler<OnProgressChangedEventArgs> OnProgressChanged;
+        public event EventHandler OnCut;
         
         [Header("Settings")]
         [SerializeField] private CuttingRecipeScriptableObject[] cuttingRecipes;
@@ -65,9 +66,10 @@ namespace _Project.Scripts.Counters
             {
                 // There is a KitchenObject here and it can be cut
                 cuttingProgress++;
+                OnCut?.Invoke(this, EventArgs.Empty);
                 
                 CuttingRecipeScriptableObject cuttingRecipe = GetCuttingRecipeFromInput(GetKitchenObject().KitchenScriptableObject);
-
+                
                 OnProgressChanged?.Invoke(this, new OnProgressChangedEventArgs
                 {
                     ProgressNormalized = (float) cuttingProgress / cuttingRecipe.cuttingProgressMax,
