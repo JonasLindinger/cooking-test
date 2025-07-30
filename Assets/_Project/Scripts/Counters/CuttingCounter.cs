@@ -1,6 +1,7 @@
 ﻿using System;
 using System.ComponentModel;
 using _Project.Scripts.CustomEventArgs;
+using _Project.Scripts.Helper;
 using _Project.Scripts.Kitchen;
 using _Project.Scripts.Object;
 using Project.Player;
@@ -8,7 +9,7 @@ using UnityEngine;
 
 namespace _Project.Scripts.Counters
 {
-    public class CuttingCounter : BaseCounter
+    public class CuttingCounter : BaseCounter, IHasProgress
     {
         public event EventHandler<OnProgressChangedEventArgs> OnProgressChanged;
         public event EventHandler OnCut;

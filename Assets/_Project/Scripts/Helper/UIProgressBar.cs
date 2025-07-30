@@ -1,24 +1,34 @@
-﻿using _Project.Scripts.CustomEventArgs;
+﻿using _Project.Scripts.Counters;
+using _Project.Scripts.CustomEventArgs;
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace _Project.Scripts.Counters
+namespace _Project.Scripts.Helper
 {
     public class UIProgressBar : MonoBehaviour
     {
         [Header("References")] 
-        [SerializeField] private CuttingCounter cuttingCounter;
+        [SerializeField] private GameObject hasProgressGameObject;
         [SerializeField] private Image progressBar;
 
+        private IHasProgress hasProgress; 
+        
         private void Start()
         {
-            cuttingCounter.OnProgressChanged += CuttingCounterOnOnProgressChanged;
+            hasProgress = hasProgressGameObject.GetComponent<IHasProgress>();
+            if (hasProgress == null)
+            {
+                Debug.LogError("HasProgress component not found");
+                return;
+            }
+            
+            hasProgress.OnProgressChanged += OnProgressChanged;
 
             progressBar.fillAmount = 0;
             Hide();
         }
 
-        private void CuttingCounterOnOnProgressChanged(object sender, OnProgressChangedEventArgs e)
+        private void OnProgressChanged(object sender, OnProgressChangedEventArgs e)
         {
             progressBar.fillAmount = e.ProgressNormalized;
 
