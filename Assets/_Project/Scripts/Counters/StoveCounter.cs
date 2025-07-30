@@ -1,4 +1,5 @@
 ﻿using System;
+using _Project.Scripts.CustomEventArgs;
 using _Project.Scripts.Kitchen;
 using _Project.Scripts.Object;
 using Project.Player;
@@ -8,6 +9,8 @@ namespace _Project.Scripts.Counters
 {
     public class StoveCounter : BaseCounter
     {
+        public event EventHandler<OnStoveCounterStateChangedEventArgs> OnStateChanged;
+        
         [Header("Settings")]
         [SerializeField] private FryingRecipeScriptableObject[] fryingRecipes;
         [SerializeField] private BurningRecipeScriptableObject[] burningRecipes;
@@ -45,6 +48,11 @@ namespace _Project.Scripts.Counters
                             state = StoveCounterState.Fried;
                             burningTimer = 0;
                             currentBurningRecipe = GetBurningRecipeFromInput(GetKitchenObject().KitchenScriptableObject);
+                            
+                            OnStateChanged?.Invoke(this, new OnStoveCounterStateChangedEventArgs
+                            {
+                                State = state
+                            });
                         }
                         break;
                     case StoveCounterState.Fried:
@@ -57,6 +65,11 @@ namespace _Project.Scripts.Counters
                             KitchenObject.SpawnKitchenObject(currentBurningRecipe.output, this);
                             
                             state = StoveCounterState.Burned;
+                            
+                            OnStateChanged?.Invoke(this, new OnStoveCounterStateChangedEventArgs
+                            {
+                                State = state
+                            });
                         }
                         break;
                     case StoveCounterState.Burned:
@@ -82,6 +95,11 @@ namespace _Project.Scripts.Counters
 
                         state = StoveCounterState.Frying;
                         fryingTimer = 0;
+                        
+                        OnStateChanged?.Invoke(this, new OnStoveCounterStateChangedEventArgs
+                        {
+                            State = state
+                        });
                     }
                 }
                 else
@@ -102,6 +120,11 @@ namespace _Project.Scripts.Counters
                     GetKitchenObject().SetKitchenObjectParent(player);
 
                     state = StoveCounterState.Idle;
+                    
+                    OnStateChanged?.Invoke(this, new OnStoveCounterStateChangedEventArgs
+                    {
+                        State = state
+                    });
                 }
             }
         }
