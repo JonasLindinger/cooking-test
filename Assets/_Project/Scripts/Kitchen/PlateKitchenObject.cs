@@ -1,4 +1,6 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
+using _Project.Scripts.CustomEventArgs;
 using _Project.Scripts.Object;
 using UnityEngine;
 
@@ -6,6 +8,8 @@ namespace _Project.Scripts.Kitchen
 {
     public class PlateKitchenObject : KitchenObject
     {
+        public event EventHandler<OnIngredientAddedEventArgs> OnIngredientAdded;
+        
         [Header("Settings")]
         [SerializeField] private List<KitchenScriptableObject> validKitchenObjects;
         
@@ -28,6 +32,11 @@ namespace _Project.Scripts.Kitchen
             {
                 // Is a new ingredient
                 kitchenObjects.Add(kitchenObject);
+                
+                OnIngredientAdded?.Invoke(this, new OnIngredientAddedEventArgs
+                {
+                    KitchenObject = kitchenObject,
+                });
                 return true;
             }
         }
