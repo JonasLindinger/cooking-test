@@ -18,6 +18,12 @@ namespace _Project.Scripts.Helper
                     Vector3 dirFromCamera = transform.position - Camera.main.transform.position;
                     transform.LookAt(transform.position + dirFromCamera);
                     break;
+                case LookAtCameraMode.CameraForward:
+                    transform.forward = Camera.main.transform.forward;
+                    break;
+                case LookAtCameraMode.CameraForwardInverted:
+                    transform.forward = -Camera.main.transform.forward;
+                    break;
             }
         }
     }

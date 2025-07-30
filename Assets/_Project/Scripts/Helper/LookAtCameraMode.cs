@@ -4,5 +4,7 @@
     {
         LookAt,
         LookAtInverted,
+        CameraForward,
+        CameraForwardInverted,
     }
 }
