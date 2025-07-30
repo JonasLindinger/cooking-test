@@ -37,6 +37,20 @@ namespace _Project.Scripts.Kitchen
 			Destroy(gameObject);
 		}
 
+		public bool TryGetPlate(out PlateKitchenObject plateKitchenObject)
+		{
+			if (this is PlateKitchenObject)
+			{
+				plateKitchenObject = (PlateKitchenObject) this;
+				return true;
+			}
+			else
+			{
+				plateKitchenObject = null;
+				return false;
+			}
+		}
+		
 		public static void SpawnKitchenObject(KitchenScriptableObject kitchenScriptableObject, IKitchenObjectParent parent)
 		{
 			Transform kitchenObjectTransform = Instantiate(kitchenScriptableObject.prefab).transform;

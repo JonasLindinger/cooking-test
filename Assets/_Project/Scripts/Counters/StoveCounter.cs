@@ -130,6 +130,26 @@ namespace _Project.Scripts.Counters
                 if (player.HasKitchenObject())
                 {
                     // Player is carrying something
+                    if (player.GetKitchenObject().TryGetPlate(out PlateKitchenObject plate))
+                    {
+                        // Player is holding a Plate
+                        if (plate.TryAddIngredient(GetKitchenObject().KitchenScriptableObject))
+                        {
+                            GetKitchenObject().DestroySelf();
+                            
+                            state = StoveCounterState.Idle;
+                    
+                            OnStateChanged?.Invoke(this, new OnStoveCounterStateChangedEventArgs
+                            {
+                                State = state
+                            });
+                    
+                            OnProgressChanged?.Invoke(this, new OnProgressChangedEventArgs
+                            {
+                                ProgressNormalized = 0
+                            });
+                        }
+                    }
                 }
                 else
                 {

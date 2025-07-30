@@ -52,6 +52,14 @@ namespace _Project.Scripts.Counters
                 if (player.HasKitchenObject())
                 {
                     // Player is carrying something
+                    if (player.GetKitchenObject().TryGetPlate(out PlateKitchenObject plate))
+                    {
+                        // Player is holding a Plate
+                        if (plate.TryAddIngredient(GetKitchenObject().KitchenScriptableObject))
+                        {
+                            GetKitchenObject().DestroySelf();
+                        }
+                    }
                 }
                 else
                 {
