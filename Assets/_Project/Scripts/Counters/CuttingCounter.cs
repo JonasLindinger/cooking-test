@@ -1,4 +1,7 @@
-﻿using _Project.Scripts.Kitchen;
+﻿using System;
+using System.ComponentModel;
+using _Project.Scripts.CustomEventArgs;
+using _Project.Scripts.Kitchen;
 using _Project.Scripts.Object;
 using Project.Player;
 using UnityEngine;
@@ -7,6 +10,9 @@ namespace _Project.Scripts.Counters
 {
     public class CuttingCounter : BaseCounter
     {
+        public event EventHandler<OnProgressChangedEventArgs> OnProgressChanged;
+        
+        [Header("Settings")]
         [SerializeField] private CuttingRecipeScriptableObject[] cuttingRecipes;
 
         private int cuttingProgress;
@@ -24,6 +30,13 @@ namespace _Project.Scripts.Counters
                         // Player carrying something that can be cut.
                         player.GetKitchenObject().SetKitchenObjectParent(this);
                         cuttingProgress = 0;
+                        
+                        CuttingRecipeScriptableObject cuttingRecipe = GetCuttingRecipeFromInput(GetKitchenObject().KitchenScriptableObject);
+                        
+                        OnProgressChanged?.Invoke(this, new OnProgressChangedEventArgs
+                        {
+                            ProgressNormalized = (float) cuttingProgress / cuttingRecipe.cuttingProgressMax,
+                        });
                     }
                 }
                 else
@@ -55,6 +68,11 @@ namespace _Project.Scripts.Counters
                 
                 CuttingRecipeScriptableObject cuttingRecipe = GetCuttingRecipeFromInput(GetKitchenObject().KitchenScriptableObject);
 
+                OnProgressChanged?.Invoke(this, new OnProgressChangedEventArgs
+                {
+                    ProgressNormalized = (float) cuttingProgress / cuttingRecipe.cuttingProgressMax,
+                });
+                
                 if (cuttingProgress >= cuttingRecipe.cuttingProgressMax)
                 {
                     KitchenScriptableObject outputKitchenObject = GetOutputFromInput(GetKitchenObject().KitchenScriptableObject);
