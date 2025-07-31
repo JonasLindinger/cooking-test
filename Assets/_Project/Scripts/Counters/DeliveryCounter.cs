@@ -11,6 +11,9 @@ namespace _Project.Scripts.Counters
             {
                 if (player.GetKitchenObject().TryGetPlate(out PlateKitchenObject plate))
                 {
+                    // Only accepts plates
+                    
+                    DeliveryManager.Instance.DeliverRecipe(plate);
                     player.GetKitchenObject().DestroySelf();
                 }
             }
