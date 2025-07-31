@@ -506,7 +506,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8660290926037262631}
   m_Layer: 0
-  m_Name: Cabbage
+  m_Name: Cabbage slices
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -784,6 +784,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 54de127f9eb045fbb9ec906b86fc806c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  plateKitchenObject: {fileID: 0}
+  kitchenScriptableObjectGameObjects: []
 --- !u!1 &7421443306947321347
 GameObject:
   m_ObjectHideFlags: 0

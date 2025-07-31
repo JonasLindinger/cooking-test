@@ -9,6 +9,9 @@ namespace _Project.Scripts.Kitchen
     public class PlateKitchenObject : KitchenObject
     {
         public event EventHandler<OnIngredientAddedEventArgs> OnIngredientAdded;
+     
+        // Getters
+        public List<KitchenScriptableObject> KitchenObjects => kitchenObjects;
         
         [Header("Settings")]
         [SerializeField] private List<KitchenScriptableObject> validKitchenObjects;
