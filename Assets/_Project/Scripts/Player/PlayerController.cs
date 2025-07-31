@@ -13,6 +13,7 @@ namespace Project.Player
         public static PlayerController Instance { get; private set; }
         
         // Events
+        public event EventHandler OnPickedUpSomething;
         public event EventHandler<OnSelectedCounterChangedEventArgs> OnSelectedCounterChanged;
         
         // Getters
@@ -175,6 +176,16 @@ namespace Project.Player
         public void SetKitchenObject(KitchenObject newKitchenObject)
         {
             kitchenObject = newKitchenObject;
+            
+            if (newKitchenObject != null)
+            {
+                // Player picked up something
+                OnPickedUpSomething?.Invoke(this, EventArgs.Empty);
+            }
+            else
+            {
+                
+            }
         }
 
         public KitchenObject GetKitchenObject()

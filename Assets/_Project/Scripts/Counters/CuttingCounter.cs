@@ -11,6 +11,8 @@ namespace _Project.Scripts.Counters
 {
     public class CuttingCounter : BaseCounter, IHasProgress
     {
+        public static event EventHandler OnAnyCut;
+        
         public event EventHandler<OnProgressChangedEventArgs> OnProgressChanged;
         public event EventHandler OnCut;
         
@@ -76,6 +78,7 @@ namespace _Project.Scripts.Counters
                 // There is a KitchenObject here and it can be cut
                 cuttingProgress++;
                 OnCut?.Invoke(this, EventArgs.Empty);
+                OnAnyCut?.Invoke(this, EventArgs.Empty);
                 
                 CuttingRecipeScriptableObject cuttingRecipe = GetCuttingRecipeFromInput(GetKitchenObject().KitchenScriptableObject);
                 

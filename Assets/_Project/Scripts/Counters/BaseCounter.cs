@@ -7,7 +7,13 @@ namespace _Project.Scripts.Counters
 {
     public class BaseCounter : MonoBehaviour, IKitchenObjectParent
     {
-        public Transform counterTopPoint;
+        // Events
+        public static event EventHandler OnAnyObjectPlacedHere;
+        
+        // Getters
+        public Transform CounterTopPoint => counterTopPoint;
+        
+        [SerializeField] private Transform counterTopPoint;
         
         private KitchenObject kitchenObject;
         
@@ -31,6 +37,11 @@ namespace _Project.Scripts.Counters
         public void SetKitchenObject(KitchenObject newKitchenObject)
         {
             kitchenObject = newKitchenObject;
+
+            if (kitchenObject != null)
+            {
+                OnAnyObjectPlacedHere?.Invoke(this, EventArgs.Empty);
+            }
         }
         
         public KitchenObject GetKitchenObject()

@@ -13,6 +13,8 @@ namespace _Project.Scripts.Kitchen
         // Events
         public event EventHandler OnRecipeSpawned;
         public event EventHandler OnRecipeCompleted;
+        public event EventHandler OnRecipeSuccess;
+        public event EventHandler OnRecipeFailed;
         
         // Getters
         public List<RecipeScriptableObject> WaitingRecipes => waitingRecipes;
@@ -30,7 +32,7 @@ namespace _Project.Scripts.Kitchen
         {
             if (Instance != null)
             {
-                Debug.LogError("There is more than one DeliveryManager in the scene!");
+                Debug.LogError("There is more than one " + GetType().Name + " in the scene!");
                 Destroy(gameObject);
                 return;
             }
@@ -97,6 +99,7 @@ namespace _Project.Scripts.Kitchen
                             waitingRecipes.RemoveAt(i);
                             
                             // Fire event
+                            OnRecipeSuccess?.Invoke(this, EventArgs.Empty);
                             OnRecipeCompleted?.Invoke(this, EventArgs.Empty);
                             return;
                         }
@@ -106,6 +109,7 @@ namespace _Project.Scripts.Kitchen
             
             // No matches found!
             // Player did not deliver a correct recipe
+            OnRecipeFailed?.Invoke(this, EventArgs.Empty);
         }
     }
 }
