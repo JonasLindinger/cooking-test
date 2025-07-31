@@ -2,7 +2,7 @@
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace _Project.Scripts.Helper
+namespace _Project.Scripts.UI
 {
     public class UIPlateIconSingle : MonoBehaviour
     {

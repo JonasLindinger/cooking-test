@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using _Project.Scripts.Object;
 using UnityEngine;
 using Random = UnityEngine.Random;
@@ -8,6 +9,13 @@ namespace _Project.Scripts.Kitchen
     public class DeliveryManager : MonoBehaviour
     {
         public static DeliveryManager Instance { get; private set; }
+        
+        // Events
+        public event EventHandler OnRecipeSpawned;
+        public event EventHandler OnRecipeCompleted;
+        
+        // Getters
+        public List<RecipeScriptableObject> WaitingRecipes => waitingRecipes;
         
         [Header("Settings")]
         [SerializeField] private RecipeListScriptableObject recipeList;
@@ -43,6 +51,8 @@ namespace _Project.Scripts.Kitchen
                 {
                     RecipeScriptableObject waitingRecipe = recipeList.recipes[Random.Range(0, recipeList.recipes.Count)];
                     waitingRecipes.Add(waitingRecipe);
+                    
+                    OnRecipeSpawned?.Invoke(this, EventArgs.Empty);
                 }
             }
         }
@@ -82,10 +92,12 @@ namespace _Project.Scripts.Kitchen
                         if (plateContentsMatchesRecipe)
                         {
                             // Plater delivered the correct recipe!
-                            Debug.Log("Player delivered the correct recipe!");
                             
                             // Remove the recipe from the waiting list
                             waitingRecipes.RemoveAt(i);
+                            
+                            // Fire event
+                            OnRecipeCompleted?.Invoke(this, EventArgs.Empty);
                             return;
                         }
                     }
@@ -94,7 +106,6 @@ namespace _Project.Scripts.Kitchen
             
             // No matches found!
             // Player did not deliver a correct recipe
-            Debug.Log("Player did not deliver a correct recipe!");
         }
     }
 }

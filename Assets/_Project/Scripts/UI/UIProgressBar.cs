@@ -1,9 +1,9 @@
-﻿using _Project.Scripts.Counters;
-using _Project.Scripts.CustomEventArgs;
+﻿using _Project.Scripts.CustomEventArgs;
+using _Project.Scripts.Helper;
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace _Project.Scripts.Helper
+namespace _Project.Scripts.UI
 {
     public class UIProgressBar : MonoBehaviour
     {

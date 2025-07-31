@@ -1,9 +1,8 @@
-﻿using System;
-using _Project.Scripts.CustomEventArgs;
+﻿using _Project.Scripts.CustomEventArgs;
 using _Project.Scripts.Kitchen;
 using UnityEngine;
 
-namespace _Project.Scripts.Helper
+namespace _Project.Scripts.UI
 {
     public class UIPlateIcons : MonoBehaviour
     {
