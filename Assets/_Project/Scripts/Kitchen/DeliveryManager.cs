@@ -18,6 +18,7 @@ namespace _Project.Scripts.Kitchen
         
         // Getters
         public List<RecipeScriptableObject> WaitingRecipes => waitingRecipes;
+        public int SuccessfulRecipesAmount => successfulRecipesAmount;
         
         [Header("Settings")]
         [SerializeField] private RecipeListScriptableObject recipeList;
@@ -27,6 +28,7 @@ namespace _Project.Scripts.Kitchen
         private List<RecipeScriptableObject> waitingRecipes = new List<RecipeScriptableObject>();
         
         private float spawnRecipeTimer;
+        private int successfulRecipesAmount;
 
         private void Awake()
         {
@@ -94,6 +96,7 @@ namespace _Project.Scripts.Kitchen
                         if (plateContentsMatchesRecipe)
                         {
                             // Plater delivered the correct recipe!
+                            successfulRecipesAmount++;
                             
                             // Remove the recipe from the waiting list
                             waitingRecipes.RemoveAt(i);

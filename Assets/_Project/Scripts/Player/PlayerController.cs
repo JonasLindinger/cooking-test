@@ -152,6 +152,8 @@ namespace Project.Player
         
         private void OnInteractAction(object sender, EventArgs e)
         {
+            if (!KitchenGameManager.Instance.IsGamePlaying) return;
+            
             if (selectedCounter != null)
             {
                 selectedCounter.Interact(this);
@@ -160,6 +162,8 @@ namespace Project.Player
         
         private void OnInteractAlternateAction(object sender, EventArgs e)
         {
+            if (!KitchenGameManager.Instance.IsGamePlaying) return;
+            
             if (selectedCounter != null)
             {
                 selectedCounter.InteractAlternate(this);
