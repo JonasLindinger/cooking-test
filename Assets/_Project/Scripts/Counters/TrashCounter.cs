@@ -8,6 +8,11 @@ namespace _Project.Scripts.Counters
         // Events
         public static event EventHandler OnAnyObjectTrashed;
         
+        public new static void ResetStaticData()
+        {
+            OnAnyObjectTrashed = null;
+        }
+        
         public override void Interact(PlayerController player)
         {
             if (player.HasKitchenObject())

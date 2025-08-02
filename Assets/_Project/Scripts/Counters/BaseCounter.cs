@@ -10,6 +10,11 @@ namespace _Project.Scripts.Counters
         // Events
         public static event EventHandler OnAnyObjectPlacedHere;
         
+        public static void ResetStaticData()
+        {
+            OnAnyObjectPlacedHere = null;
+        }
+        
         // Getters
         public Transform CounterTopPoint => counterTopPoint;
         

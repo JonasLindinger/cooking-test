@@ -1,4 +1,5 @@
 ﻿using System;
+using _Project.Scripts.Input;
 using UnityEngine;
 
 namespace _Project.Scripts.Kitchen
@@ -9,6 +10,8 @@ namespace _Project.Scripts.Kitchen
         
         // Events
         public event EventHandler OnStateChanged;
+        public event EventHandler OnGamePaused;
+        public event EventHandler OnGameUnpaused;
         
         // Getters
         public float CountdownToStartTimerTimer => countdownToStartTimer;
@@ -24,6 +27,8 @@ namespace _Project.Scripts.Kitchen
         private float countdownToStartTimer = 3f;
         private float gamePlayingTimer;
         private float gamePlayingTimerMax = 10f;
+
+        private bool isGamePaused;
         
         private void Awake()
         {
@@ -37,6 +42,16 @@ namespace _Project.Scripts.Kitchen
             {
                 Instance = this;
             }
+        }
+
+        private void Start()
+        {
+            InputManager.Instance.OnPauseAction += InputManagerOnPauseAction;
+        }
+
+        private void InputManagerOnPauseAction(object sender, EventArgs e)
+        {
+            TogglePauseGame();
         }
 
         private void Update()
@@ -73,6 +88,18 @@ namespace _Project.Scripts.Kitchen
                 case KitchenGameState.GameOver:
                     break;
             }
+        }
+
+        public void TogglePauseGame()
+        {
+            isGamePaused = !isGamePaused;
+            
+            Time.timeScale = isGamePaused ? 0 : 1;
+            
+            if (isGamePaused)
+                OnGamePaused?.Invoke(this, EventArgs.Empty);
+            else 
+                OnGameUnpaused?.Invoke(this, EventArgs.Empty);
         }
     }
 }

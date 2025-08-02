@@ -13,6 +13,11 @@ namespace _Project.Scripts.Counters
     {
         public static event EventHandler OnAnyCut;
         
+        public new static void ResetStaticData()
+        {
+            OnAnyCut = null;
+        }
+        
         public event EventHandler<OnProgressChangedEventArgs> OnProgressChanged;
         public event EventHandler OnCut;
         

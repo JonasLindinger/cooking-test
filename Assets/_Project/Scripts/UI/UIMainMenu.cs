@@ -1,4 +1,5 @@
-﻿using _Project.Scripts.SceneManagement;
+﻿using System;
+using _Project.Scripts.SceneManagement;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -22,6 +23,11 @@ namespace _Project.Scripts.UI
                 // Quit
                 Application.Quit();
             });
+        }
+
+        private void Start()
+        {
+            Time.timeScale = 1f;
         }
     }
 }
