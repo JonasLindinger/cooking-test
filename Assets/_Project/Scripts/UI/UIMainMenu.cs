@@ -1,5 +1,5 @@
-﻿using UnityEngine;
-using UnityEngine.SceneManagement;
+﻿using _Project.Scripts.SceneManagement;
+using UnityEngine;
 using UnityEngine.UI;
 
 namespace _Project.Scripts.UI
@@ -14,7 +14,7 @@ namespace _Project.Scripts.UI
             playButton.onClick.AddListener(() =>
             {
                 // Click
-                SceneManager.LoadScene(1);
+                Loader.Load(Scene.Game);
             });
             
             quitButton.onClick.AddListener(() =>
